@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Food Map: Berlin</title>
+  <meta name="description" content="Germany will always be one of my favourite places to visit, but as someone with quite a restricted diet (I don’t eat beef) I’ve always struggled to find food...">
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Source+Sans+Pro:400,700,200,300|Josefin+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="canonical" href="http://localhost:4000/2018/01/17/food-map-berlin.html">
+  <link rel="alternate" type="application/rss+xml" title="Dishing Up" href="http://localhost:4000/feed.xml">
+<script type='text/javascript'>
+  /* global google */
+/* global MarkerClusterer */
+// eslint-disable-next-line no-unused-vars
+var jekyllMaps = (function() {
+  'use strict'
+  var clusterSettings = {}
+  var clusterReady = false
+  var mapReady = false
+  var options = {}
+  var data = []
+  var maps = []
+
+  return {
+    initializeMap: initializeMap,
+    initializeCluster: initializeCluster,
+    register: register
+  }
+
+  /**
+   * Setup Google Maps options and call renderer.
+   */
+  function initializeMap() {
+    options = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: new google.maps.LatLng(0, 0)
+    }
+    mapReady = true
+    render()
+  }
+
+  /**
+   * Register map data to be rendered once Google Maps API is loaded.
+   *
+   * @param string id
+   * @param Array locations
+   * @param Object settings
+   */
+  function register(id, locations, options) {
+    data.push({ id: id, locations: locations, options: options })
+    render()
+  }
+
+  /**
+   * Render maps data if Google Maps API is loaded.
+   */
+  function render() {
+    if (!mapReady) return
+
+    while (data.length > 0) {
+      var item = data.pop()
+      var bounds = new google.maps.LatLngBounds()
+      var mapOptions = Object.assign({}, options, item.options)
+      var map = new google.maps.Map(
+        document.getElementById(item.id),
+        mapOptions
+      )
+      var infoWindow = new google.maps.InfoWindow()
+      var markers = item.locations.map(createMarker)
+
+      map.fitBounds(bounds)
+      google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+        if (this.customZoom) this.setZoom(this.customZoom)
+      })
+      if (mapOptions.useCluster) {
+        maps.push({ map: map, markers: markers })
+        processCluster()
+      }
+    }
+
+    function createMarker(location) {
+      var position = new google.maps.LatLng(
+        location.latitude,
+        location.longitude
+      )
+      bounds.extend(position)
+      if (!mapOptions.showMarker) return false
+
+      var marker = new google.maps.Marker({
+        position: position,
+        title: location.title,
+        image: location.image,
+        url: location.url.length > 0 ? mapOptions.baseUrl + location.url : '',
+        map: map
+      })
+      if (mapOptions.showMarkerPopup) marker.addListener('click', markerPopup)
+
+      return marker
+    }
+
+    function markerPopup() {
+      var contentHtml =
+        '<div class="map-info-window"><h5>' + this.title + '</h5>'
+      var imageHtml = '<img src="' + this.image + '" alt="' + this.title + '"/>'
+      if (this.url.length > 0) {
+        var linkText = this.image.length > 0 ? imageHtml : 'View'
+        contentHtml += '<a href="' + this.url + '">' + linkText + '</a></div>'
+      } else if (this.image.length > 0) {
+        contentHtml += imageHtml
+      }
+      infoWindow.setContent(contentHtml)
+      infoWindow.open(map, this)
+    }
+  }
+
+  function initializeCluster(settings) {
+    clusterReady = true
+    clusterSettings = settings || {}
+    processCluster()
+  }
+
+  function processCluster() {
+    if (!clusterReady) return
+
+    while (maps.length > 0) {
+      var obj = maps.pop()
+      // eslint-disable-next-line no-new
+      new MarkerClusterer(obj.map, obj.markers, {
+        gridSize: clusterSettings.grid_size || 25,
+        imagePath:
+          'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m'
+      })
+    }
+  }
+})()
+/* Object.assign polyfill */
+if (typeof Object.assign !== 'function') {
+  Object.assign = function(target) {
+    'use strict'
+    if (target == null) {
+      throw new TypeError('Cannot convert undefined or null to object')
+    }
+
+    target = Object(target)
+    for (var index = 1; index < arguments.length; index++) {
+      var source = arguments[index]
+      if (source != null) {
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key]
+          }
+        }
+      }
+    }
+    return target
+  }
+}
+
+</script>
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDPEf-TJWEKGADr16dfEx9YmrQVzY7BVPA&callback=jekyllMaps.initializeMap'></script>
+
+
+</head>
+
+
+  <body class=" light  ">
+
+    
+<div class="wrapper">
+  <center> <a href="/index.html"><div class="site-title">   Dishing Up </div></a></center>
+</div>
+<div class="wrapper site-description">
+<center>  Making Tasty Shit </center>
+</div>
+<div class="wrapper">
+  <div class="trigger site-navigation">
+    <a class="page-link" href="http://localhost:4000">HOME</a>
+
+    
+    
+
+    <span class="exclamationMark">/</span><a class="page-link" href="/about/">About</a>
+    
+    
+    
+
+    <span class="exclamationMark">/</span><a class="page-link" href="/design/">Design</a>
+    
+    
+    
+
+    <span class="exclamationMark">/</span><a class="page-link" href="/download/">Download</a>
+    
+    
+    
+    
+    
+    
+    
+
+    <span class="exclamationMark">/</span><a class="page-link" href="/science/">Science</a>
+    
+    
+    
+    
+  </div>
+</div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline"><a class="post-title-link"  href="/2018/01/17/food-map-berlin.html">Food Map: Berlin</a></h1>
+  <center>  <p class="post-meta"><time datetime="2018-01-17T00:00:00+00:00" itemprop="datePublished">Jan 17, 2018</time></p>
+    
+     <div class="">
+       <center><p ><strong><span class="authorKeyword">Author</span><span class="small-site-title"> <h2 style="letter-spacing: 3px !important;
+       text-transform: uppercase !important;">Alice Hargreaves</h2></span></strong></p></center>
+
+     </div>
+     
+   </center>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Germany will always be one of my favourite places to visit, but as someone with quite a restricted diet (I don’t eat beef) I’ve always struggled to find foods that are fun, healthy, and varied. In recent years however, Berlin’s food scene has exploded and the results are phenomenal. Prenzlauer Berg in the Pankow district proved to have a huge variety of delicious eats, although we returned to Café Hilde three times.</p>
+
+<div id="3c36df50-bd54-49b8-a566-8e7833642444" style="width:600px;height:400px;"></div>
+<script type="text/javascript">
+  jekyllMaps.register(
+    '3c36df50-bd54-49b8-a566-8e7833642444',
+    [{"latitude":52.53093,"longitude":13.41891,"title":"Café Hilde","url":"/2018/01/17/food-map-berlin.html","image":""},{"latitude":52.53158,"longitude":13.41703,"title":"Leibhaftig","url":"/2018/01/17/food-map-berlin.html","image":""},{"latitude":52.53448,"longitude":13.41943,"title":"Unami","url":"/2018/01/17/food-map-berlin.html","image":""},{"latitude":52.53977,"longitude":13.40992,"title":"Prater Biergarten Berlin","url":"/2018/01/17/food-map-berlin.html","image":""},{"latitude":52.5237,"longitude":13.40069,"title":"Curry61","url":"/2018/01/17/food-map-berlin.html","image":""},{"latitude":52.50986,"longitude":13.45102,"title":"Mustafas Gemüse Döner","url":"/2018/01/17/food-map-berlin.html","image":""}],
+    {"baseUrl":"","useCluster":true,"showMarker":true,"showMarkerPopup":true}
+  );
+</script>
+
+<h2 id="café-hilde"><a href="http://hilde-berlin.com/">Café Hilde</a></h2>
+
+<p>This cosy neighbourhood café proved to be a winner, not just for myself and Dave, but also his retired Dad. For me, the shared breakfast plate for 2 was a triumph. Meats, cheeses, salad, boiled eggs, fruit, bread and jam all in plentiful quantities.</p>
+
+<p>The omelettes, made with any combimnation of ingredients and fresh cakes and strudel are also worth a mention- as are their unusual combination of hot drinks including a mango chai, which was as good as it sounds!</p>
+
+<h2 id="leibhaftig"><a href="www.leibhaftig.com">Leibhaftig</a></h2>
+
+<p>Just down the road from Café Hilde is the basement bar and restaurant with seating outside in summer, Leibhaftig. Despite being 585kms from the capital of Bavaria, Leibhaftig serves Bavarian tapas and craft beers.</p>
+
+<p>Try the obatzda, a bavarian cheese dip that is both smokey and creamy served with rye. We shared 2 plates of the pork in beer sauce, some potato salad, obatzda, and sausages between three and left full and satisfied. If you are looking for German food with a fun twist- then this is your place.</p>
+
+<h2 id="umami"><a href="http://pberg.umami-restaurant.de/#/">Umami</a></h2>
+
+<p>I must admit we turned up to Umami exhausted, on a very hot, very busy Berlin August Saturday and were very lucky to get a seat. In summer the restaurant in IndoChinese cuisine more than doubles in size with tables sprawling out to the square in front. The atmosphere was buzzing with street performers and what felt like most of Berlin begging for a table.</p>
+
+<p>Exhausted, we opted to keep things simple with the set Bao Dai’s Dinner which was a mere 32,80€ for 3 people- even with drinks and a few extras thrown in you cannot deny this was an absolute steal.</p>
+
+<h2 id="prater-biergarten-berlin"><a href="www.prater-biergarten.de">Prater Biergarten Berlin</a></h2>
+
+<p>After all that eating, the only natural thing to do is drink some beers and Prater Biergarten is one of the biggest in Berlin. To me this is how a German biergarten should be, long gregarious benches, simple foods (pretzels galore) and plenty of beers to try.</p>
+
+<p>Now this absolutely is not a recommendation as such, but if you want to experience a biergarten like most German teenagers circa 2005 ask for a Diesel (a pepsi/coke with beer) or for a more ‘grown up’ version try a Berliner Weisse which is flavoured with syrup.</p>
+
+<h2 id="curry61"><a href="http://www.curry61.de/">Curry61</a></h2>
+
+<p>The original currywurst is a source of much contention and you can absolutely buy this local delicacy of sliced sausages with a spiced ketchup on every street corner. Curry61 however seems to be a popular choice and was one of our friend’s favourites.</p>
+
+<p>A highlight for me was the vegan wurst with chips which was exceptionally cheap and Dave assures me it tasted almost the same as the meat version.</p>
+
+<h2 id="mustafas-gemüse-döner">Mustafas Gemüse Döner</h2>
+
+<p>If you’re going to Berlin and for some reason can only eat one thing then this side of the road vendor is absolutely that one thing. The roasted vegetable kebab with halloumi cost under 5€ and offered more bang than I think I’ve ever seen for your buck.</p>
+
+<p>These have popped up all over Berlin, including one a short walk from Museum Islan don Neue Promenade which even has seating but the pricing and the portion sizings do differ.</p>
+
+<h2 id="a-side-note-on-berliners">A side note on Berliners</h2>
+
+<p>We did spend time searching for the perfect Berliner but August is not the best time to search for a Berliner. Although they are available throughout the year it is best to go Berliner hunting between late December and Easter as consumption of a Berliner is associated with New Year’s Eve and the carnival which falls on shrove Monday and Tuesday. Next time I’ll make sure I’m in Berlin for pancake day!</p>
+
+
+  </div>
+
+  <footer class="postNavigation">
+  
+    <a class="postPrev" href="/jekyll/update/2016/03/30/welcome-to-jekyll.html">
+        &laquo; Welcome to Gravity!
+    </a>
+  
+  
+  </footer>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading small-site-title">Dishing Up</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list footer-content">
+          <li>Powered By <a href="http://github.com/hemangsk/Gravity">Gravity</a></li>
+          <li>Made with <i class="fa fa-heart"></i> on <a href="http://jekyllrb.com"><span>{ { Jekyll } }</a></span></li>
+
+
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2 footer-content">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://twitter.com/dishingup"><span class="icon"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">dishingup</span></a>
+
+          </li>
+          
+          
+          <li>
+            <a href="https://instagram.com/ali_lou_food"><span class="icon icon--instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M14.829 6.302c-.738-.034-.96-.04-2.829-.04s-2.09.007-2.828.04c-1.899.087-2.783.986-2.87 2.87-.033.738-.041.959-.041 2.828s.008 2.09.041 2.829c.087 1.879.967 2.783 2.87 2.87.737.033.959.041 2.828.041 1.87 0 2.091-.007 2.829-.041 1.899-.086 2.782-.988 2.87-2.87.033-.738.04-.96.04-2.829s-.007-2.09-.04-2.828c-.088-1.883-.973-2.783-2.87-2.87zm-2.829 9.293c-1.985 0-3.595-1.609-3.595-3.595 0-1.985 1.61-3.594 3.595-3.594s3.595 1.609 3.595 3.594c0 1.985-1.61 3.595-3.595 3.595zm3.737-6.491c-.464 0-.84-.376-.84-.84 0-.464.376-.84.84-.84.464 0 .84.376.84.84 0 .463-.376.84-.84.84zm-1.404 2.896c0 1.289-1.045 2.333-2.333 2.333s-2.333-1.044-2.333-2.333c0-1.289 1.045-2.333 2.333-2.333s2.333 1.044 2.333 2.333zm-2.333-12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.958 14.886c-.115 2.545-1.532 3.955-4.071 4.072-.747.034-.986.042-2.887.042s-2.139-.008-2.886-.042c-2.544-.117-3.955-1.529-4.072-4.072-.034-.746-.042-.985-.042-2.886 0-1.901.008-2.139.042-2.886.117-2.544 1.529-3.955 4.072-4.071.747-.035.985-.043 2.886-.043s2.14.008 2.887.043c2.545.117 3.957 1.532 4.071 4.071.034.747.042.985.042 2.886 0 1.901-.008 2.14-.042 2.886z"/></svg>
+</span><span class="username">ali_lou_food</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3 site-description">
+        <p>Making Tasty Shit</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

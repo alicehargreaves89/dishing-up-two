@@ -1,0 +1,319 @@
+<script type='text/javascript'>
+  /* global google */
+/* global MarkerClusterer */
+// eslint-disable-next-line no-unused-vars
+var jekyllMaps = (function() {
+  'use strict'
+  var clusterSettings = {}
+  var clusterReady = false
+  var mapReady = false
+  var options = {}
+  var data = []
+  var maps = []
+
+  return {
+    initializeMap: initializeMap,
+    initializeCluster: initializeCluster,
+    register: register
+  }
+
+  /**
+   * Setup Google Maps options and call renderer.
+   */
+  function initializeMap() {
+    options = {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: new google.maps.LatLng(0, 0)
+    }
+    mapReady = true
+    render()
+  }
+
+  /**
+   * Register map data to be rendered once Google Maps API is loaded.
+   *
+   * @param string id
+   * @param Array locations
+   * @param Object settings
+   */
+  function register(id, locations, options) {
+    data.push({ id: id, locations: locations, options: options })
+    render()
+  }
+
+  /**
+   * Render maps data if Google Maps API is loaded.
+   */
+  function render() {
+    if (!mapReady) return
+
+    while (data.length > 0) {
+      var item = data.pop()
+      var bounds = new google.maps.LatLngBounds()
+      var mapOptions = Object.assign({}, options, item.options)
+      var map = new google.maps.Map(
+        document.getElementById(item.id),
+        mapOptions
+      )
+      var infoWindow = new google.maps.InfoWindow()
+      var markers = item.locations.map(createMarker)
+
+      map.fitBounds(bounds)
+      google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+        if (this.customZoom) this.setZoom(this.customZoom)
+      })
+      if (mapOptions.useCluster) {
+        maps.push({ map: map, markers: markers })
+        processCluster()
+      }
+    }
+
+    function createMarker(location) {
+      var position = new google.maps.LatLng(
+        location.latitude,
+        location.longitude
+      )
+      bounds.extend(position)
+      if (!mapOptions.showMarker) return false
+
+      var marker = new google.maps.Marker({
+        position: position,
+        title: location.title,
+        image: location.image,
+        url: location.url.length > 0 ? mapOptions.baseUrl + location.url : '',
+        map: map
+      })
+      if (mapOptions.showMarkerPopup) marker.addListener('click', markerPopup)
+
+      return marker
+    }
+
+    function markerPopup() {
+      var contentHtml =
+        '<div class="map-info-window"><h5>' + this.title + '</h5>'
+      var imageHtml = '<img src="' + this.image + '" alt="' + this.title + '"/>'
+      if (this.url.length > 0) {
+        var linkText = this.image.length > 0 ? imageHtml : 'View'
+        contentHtml += '<a href="' + this.url + '">' + linkText + '</a></div>'
+      } else if (this.image.length > 0) {
+        contentHtml += imageHtml
+      }
+      infoWindow.setContent(contentHtml)
+      infoWindow.open(map, this)
+    }
+  }
+
+  function initializeCluster(settings) {
+    clusterReady = true
+    clusterSettings = settings || {}
+    processCluster()
+  }
+
+  function processCluster() {
+    if (!clusterReady) return
+
+    while (maps.length > 0) {
+      var obj = maps.pop()
+      // eslint-disable-next-line no-new
+      new MarkerClusterer(obj.map, obj.markers, {
+        gridSize: clusterSettings.grid_size || 25,
+        imagePath:
+          'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m'
+      })
+    }
+  }
+})()
+/* Object.assign polyfill */
+if (typeof Object.assign !== 'function') {
+  Object.assign = function(target) {
+    'use strict'
+    if (target == null) {
+      throw new TypeError('Cannot convert undefined or null to object')
+    }
+
+    target = Object(target)
+    for (var index = 1; index < arguments.length; index++) {
+      var source = arguments[index]
+      if (source != null) {
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key]
+          }
+        }
+      }
+    }
+    return target
+  }
+}
+
+</script>
+<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDPEf-TJWEKGADr16dfEx9YmrQVzY7BVPA&callback=jekyllMaps.initializeMap'></script>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dishing Up</title>
+    <description>Making Tasty Shit</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 17 Jan 2018 21:10:23 +0000</pubDate>
+    <lastBuildDate>Wed, 17 Jan 2018 21:10:23 +0000</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Food Map: Berlin</title>
+        <description>&lt;p&gt;Germany will always be one of my favourite places to visit, but as someone with quite a restricted diet (I don’t eat beef) I’ve always struggled to find foods that are fun, healthy, and varied. In recent years however, Berlin’s food scene has exploded and the results are phenomenal. Prenzlauer Berg in the Pankow district proved to have a huge variety of delicious eats, although we returned to Café Hilde three times.&lt;/p&gt;
+
+&lt;div id=&quot;3c36df50-bd54-49b8-a566-8e7833642444&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '3c36df50-bd54-49b8-a566-8e7833642444',
+    [{&quot;latitude&quot;:52.53093,&quot;longitude&quot;:13.41891,&quot;title&quot;:&quot;Café Hilde&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53158,&quot;longitude&quot;:13.41703,&quot;title&quot;:&quot;Leibhaftig&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53448,&quot;longitude&quot;:13.41943,&quot;title&quot;:&quot;Unami&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53977,&quot;longitude&quot;:13.40992,&quot;title&quot;:&quot;Prater Biergarten Berlin&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.5237,&quot;longitude&quot;:13.40069,&quot;title&quot;:&quot;Curry61&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.50986,&quot;longitude&quot;:13.45102,&quot;title&quot;:&quot;Mustafas Gemüse Döner&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true}
+  );
+&lt;/script&gt;
+
+&lt;h2 id=&quot;café-hilde&quot;&gt;&lt;a href=&quot;http://hilde-berlin.com/&quot;&gt;Café Hilde&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;This cosy neighbourhood café proved to be a winner, not just for myself and Dave, but also his retired Dad. For me, the shared breakfast plate for 2 was a triumph. Meats, cheeses, salad, boiled eggs, fruit, bread and jam all in plentiful quantities.&lt;/p&gt;
+
+&lt;p&gt;The omelettes, made with any combimnation of ingredients and fresh cakes and strudel are also worth a mention- as are their unusual combination of hot drinks including a mango chai, which was as good as it sounds!&lt;/p&gt;
+
+&lt;h2 id=&quot;leibhaftig&quot;&gt;&lt;a href=&quot;www.leibhaftig.com&quot;&gt;Leibhaftig&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Just down the road from Café Hilde is the basement bar and restaurant with seating outside in summer, Leibhaftig. Despite being 585kms from the capital of Bavaria, Leibhaftig serves Bavarian tapas and craft beers.&lt;/p&gt;
+
+&lt;p&gt;Try the obatzda, a bavarian cheese dip that is both smokey and creamy served with rye. We shared 2 plates of the pork in beer sauce, some potato salad, obatzda, and sausages between three and left full and satisfied. If you are looking for German food with a fun twist- then this is your place.&lt;/p&gt;
+
+&lt;h2 id=&quot;umami&quot;&gt;&lt;a href=&quot;http://pberg.umami-restaurant.de/#/&quot;&gt;Umami&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;I must admit we turned up to Umami exhausted, on a very hot, very busy Berlin August Saturday and were very lucky to get a seat. In summer the restaurant in IndoChinese cuisine more than doubles in size with tables sprawling out to the square in front. The atmosphere was buzzing with street performers and what felt like most of Berlin begging for a table.&lt;/p&gt;
+
+&lt;p&gt;Exhausted, we opted to keep things simple with the set Bao Dai’s Dinner which was a mere 32,80€ for 3 people- even with drinks and a few extras thrown in you cannot deny this was an absolute steal.&lt;/p&gt;
+
+&lt;h2 id=&quot;prater-biergarten-berlin&quot;&gt;&lt;a href=&quot;www.prater-biergarten.de&quot;&gt;Prater Biergarten Berlin&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;After all that eating, the only natural thing to do is drink some beers and Prater Biergarten is one of the biggest in Berlin. To me this is how a German biergarten should be, long gregarious benches, simple foods (pretzels galore) and plenty of beers to try.&lt;/p&gt;
+
+&lt;p&gt;Now this absolutely is not a recommendation as such, but if you want to experience a biergarten like most German teenagers circa 2005 ask for a Diesel (a pepsi/coke with beer) or for a more ‘grown up’ version try a Berliner Weisse which is flavoured with syrup.&lt;/p&gt;
+
+&lt;h2 id=&quot;curry61&quot;&gt;&lt;a href=&quot;http://www.curry61.de/&quot;&gt;Curry61&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The original currywurst is a source of much contention and you can absolutely buy this local delicacy of sliced sausages with a spiced ketchup on every street corner. Curry61 however seems to be a popular choice and was one of our friend’s favourites.&lt;/p&gt;
+
+&lt;p&gt;A highlight for me was the vegan wurst with chips which was exceptionally cheap and Dave assures me it tasted almost the same as the meat version.&lt;/p&gt;
+
+&lt;h2 id=&quot;mustafas-gemüse-döner&quot;&gt;Mustafas Gemüse Döner&lt;/h2&gt;
+
+&lt;p&gt;If you’re going to Berlin and for some reason can only eat one thing then this side of the road vendor is absolutely that one thing. The roasted vegetable kebab with halloumi cost under 5€ and offered more bang than I think I’ve ever seen for your buck.&lt;/p&gt;
+
+&lt;p&gt;These have popped up all over Berlin, including one a short walk from Museum Islan don Neue Promenade which even has seating but the pricing and the portion sizings do differ.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-side-note-on-berliners&quot;&gt;A side note on Berliners&lt;/h2&gt;
+
+&lt;p&gt;We did spend time searching for the perfect Berliner but August is not the best time to search for a Berliner. Although they are available throughout the year it is best to go Berliner hunting between late December and Easter as consumption of a Berliner is associated with New Year’s Eve and the carnival which falls on shrove Monday and Tuesday. Next time I’ll make sure I’m in Berlin for pancake day!&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 17 Jan 2018 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/2018/01/17/food-map-berlin.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/01/17/food-map-berlin.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Gravity!</title>
+        <description>&lt;p&gt;Gravity is an unopinionated theme for Jekyll, the awesome static site generator.&lt;/p&gt;
+
+&lt;p&gt;Some General Instructions for Jekyll&lt;/p&gt;
+
+&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
+        <link>http://localhost:4000/jekyll/update/2016/03/30/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2016/03/30/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Long Longer and more Longer titles look cool too!!</title>
+        <description>&lt;p&gt;“Could I be anymore pulling ?”&lt;/p&gt;
+
+&lt;p&gt;Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+
+&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
+        <link>http://localhost:4000/science/2016/03/30/science0.html</link>
+        <guid isPermaLink="true">http://localhost:4000/science/2016/03/30/science0.html</guid>
+        
+        
+        <category>science</category>
+        
+      </item>
+    
+      <item>
+        <title>Science of Gravity</title>
+        <description>&lt;p&gt;“Could I be anymore pulling ?”&lt;/p&gt;
+
+&lt;p&gt;Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+
+&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
+        <link>http://localhost:4000/science/2016/03/30/science.html</link>
+        <guid isPermaLink="true">http://localhost:4000/science/2016/03/30/science.html</guid>
+        
+        
+        <category>science</category>
+        
+      </item>
+    
+      <item>
+        <title>Design Stories : Gravity</title>
+        <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit.&lt;/p&gt;
+
+&lt;p&gt;Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+
+&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
+        <link>http://localhost:4000/design/science/life/2016/03/30/design-stories.html</link>
+        <guid isPermaLink="true">http://localhost:4000/design/science/life/2016/03/30/design-stories.html</guid>
+        
+        
+        <category>design</category>
+        
+        <category>science</category>
+        
+        <category>life</category>
+        
+      </item>
+    
+  </channel>
+</rss>

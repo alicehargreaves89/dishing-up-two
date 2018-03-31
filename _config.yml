@@ -1,0 +1,31 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Dishing Up
+email: alice.hargreaves89@gmail.com
+description: Making Tasty Shit
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://dishingup.com" # the base hostname & protocol for your site
+twitter_username: dishingup
+github_username:  alicehargreaves89
+instagram_username: ali_lou_food
+paginate: 5
+theme-dark: false #Set to true to change to dark website theme
+
+# Plugins
+plugins: [jekyll-paginate, kramdown, jekyll-maps]
+
+# Build settings
+markdown: kramdown
+
+# Google maps
+maps:
+  google:
+    api_key: AIzaSyDPEf-TJWEKGADr16dfEx9YmrQVzY7BVPA
+    marker_cluster:
+      enabled: false
