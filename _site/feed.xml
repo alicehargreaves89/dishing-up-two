@@ -59,7 +59,7 @@ var jekyllMaps = (function() {
       var markers = item.locations.map(createMarker)
 
       map.fitBounds(bounds)
-      google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+      google.maps.event.addListenerOnce(map, 'idle', function() {
         if (this.customZoom) this.setZoom(this.customZoom)
       })
       if (mapOptions.useCluster) {
@@ -80,7 +80,9 @@ var jekyllMaps = (function() {
         position: position,
         title: location.title,
         image: location.image,
-        url: location.url.length > 0 ? mapOptions.baseUrl + location.url : '',
+        icon: location.icon || mapOptions.markerIcon,
+        url: markerUrl(mapOptions.baseUrl, location.url),
+        url_text: location.url_text,
         map: map
       })
       if (mapOptions.showMarkerPopup) marker.addListener('click', markerPopup)
@@ -88,17 +90,25 @@ var jekyllMaps = (function() {
       return marker
     }
 
+    function markerUrl(baseUrl, url) {
+      if (/^(https?|\/\/)/.test(url)) return url
+
+      return url.length > 0 ? baseUrl + url : ''
+    }
+
     function markerPopup() {
-      var contentHtml =
-        '<div class="map-info-window"><h5>' + this.title + '</h5>'
-      var imageHtml = '<img src="' + this.image + '" alt="' + this.title + '"/>'
+      var content = '<div class="map-info-window"><h5>' + this.title + '</h5>'
+      var imageTag =
+        this.image.length > 0 &&
+        '<img src="' + this.image + '" alt="' + this.title + '"/>'
       if (this.url.length > 0) {
-        var linkText = this.image.length > 0 ? imageHtml : 'View'
-        contentHtml += '<a href="' + this.url + '">' + linkText + '</a></div>'
-      } else if (this.image.length > 0) {
-        contentHtml += imageHtml
+        var linkContent = imageTag || this.url_text || 'View'
+        content += '<a href="' + this.url + '">' + linkContent + '</a>'
+      } else if (imageTag) {
+        content += imageTag
       }
-      infoWindow.setContent(contentHtml)
+      content += '</div>'
+      infoWindow.setContent(content)
       infoWindow.open(map, this)
     }
   }
@@ -157,26 +167,70 @@ if (typeof Object.assign !== 'function') {
     <description>Making Tasty Shit</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Jan 2018 21:10:23 +0000</pubDate>
-    <lastBuildDate>Wed, 17 Jan 2018 21:10:23 +0000</lastBuildDate>
-    <generator>Jekyll v3.6.2</generator>
+    <pubDate>Sun, 01 Apr 2018 10:46:27 +0100</pubDate>
+    <lastBuildDate>Sun, 01 Apr 2018 10:46:27 +0100</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>Food Map: Newtown</title>
+        <description>&lt;p&gt;Newtown, in Inner West Sydney, will always have a place in my heart. I lived here for about a year in probably the best apartment I will ever live in with one of the most fantastic roof terraces. It’s an eclectic place with an amazing culture. From crystal shops to Thai food, if you’re ever in Sydney it’s worth the two stops on the train from the CBD.&lt;/p&gt;
+
+&lt;div id=&quot;1f1b4cb7-5366-4cc8-9709-6a4dc34cecfb&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  jekyllMaps.register(
+    '1f1b4cb7-5366-4cc8-9709-6a4dc34cecfb',
+    [{&quot;latitude&quot;:-33.89277,&quot;longitude&quot;:151.185141,&quot;title&quot;:&quot;Thai La Ong&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.896967,&quot;longitude&quot;:151.178457,&quot;title&quot;:&quot;Black Star Pastry Newtown&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.893896,&quot;longitude&quot;:151.182396,&quot;title&quot;:&quot;Brewtown Newtown&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.9031744,&quot;longitude&quot;:151.1794577,&quot;title&quot;:&quot;Pastizzi Cafe&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.895836,&quot;longitude&quot;:151.1776183,&quot;title&quot;:&quot;Mary's&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;markerIcon&quot;:null}
+  );
+&lt;/script&gt;
+
+&lt;h2 id=&quot;thai-la-ong&quot;&gt;&lt;a href=&quot;https://http://thailaongrestaurant.com.au/&quot;&gt;Thai La Ong&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Apparently Newtown has the highest concetration of Thai restaurants outside Thailand and I can absolutely believe that. For my shame however, I came to Thai La Ong on a recommendation of a friend and couldn’t imagine going anywhere else. Try the red duck curry and the curry puffs and you will not be disappointed.&lt;/p&gt;
+
+&lt;h2 id=&quot;black-star-pastry&quot;&gt;&lt;a href=&quot;https://blackstarpastry.com.au&quot;&gt;Black Star Pastry&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The watermelon cake at Black Star is a Sydney icon. Thinly sliced watermelon layered with rose and strawberry jelly and laden with pistachios this place is just fantastic.&lt;/p&gt;
+
+&lt;p&gt;It’s also a great aphrodisiac.&lt;/p&gt;
+
+&lt;h2 id=&quot;brewtown-newtown&quot;&gt;&lt;a href=&quot;https://www.brewtownnewtown.com/&quot;&gt;Brewtown Newtown&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The menu has changed a lot in the last couple of years and it seems that the ever popular cronut donut has now left the menu, perhaps too many people had very high increases in cholesterol. This is however, still the place for cronuts (croissant donuts) in Sydney.&lt;/p&gt;
+
+&lt;h2 id=&quot;pastizzi-cafe&quot;&gt;&lt;a href=&quot;https://www.facebook.com/PASTIZZI-CAFE-287754542104/&quot;&gt;Pastizzi Cafe&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Pastizzi are a traditional savoury pastry from Malta often filled with cheese or meat. They are also little drops of heaven in a delicious flaky pastry. Pastizzi cafe serves an array of flavours as well as homemade filled pasta. Have a few pastizzi for a super tasty and cheap lunch. The cafe has a small number of tables outside and gets very busy during peak hours.&lt;/p&gt;
+
+&lt;p&gt;**You can buy both the pastizzi and the pasta frozen to take home and I would thoroughly recommend doing so.&lt;/p&gt;
+
+&lt;h2 id=&quot;marys&quot;&gt;&lt;a href=&quot;http://www.getfat.com.au/menu/&quot;&gt;Mary’s&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Sydney has some pretty crazy weather at times and once, on a warm Sydney summers day, we decided to do into a dark heavy metal pub with no windows. Whilst inside, the heavens opened and hail like golf balls fell from the sky. Meanwhile burgers, fried chicken, and a hell of a lot of Jack Daniels were consumed as the hail damaged the roof of the pub and the electrics cut out- so we ended up eating and drinking for free. Ok, so I admit that was a freak incident but Mary’s burgers are THE burger to eat in Sydney and the staff here are incredible. This is absolutely one of the funnest places to be.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jan 2018 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/2018/01/17/food-map-newtown.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/01/17/food-map-newtown.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Food Map: Berlin</title>
         <description>&lt;p&gt;Germany will always be one of my favourite places to visit, but as someone with quite a restricted diet (I don’t eat beef) I’ve always struggled to find foods that are fun, healthy, and varied. In recent years however, Berlin’s food scene has exploded and the results are phenomenal. Prenzlauer Berg in the Pankow district proved to have a huge variety of delicious eats, although we returned to Café Hilde three times.&lt;/p&gt;
 
-&lt;div id=&quot;3c36df50-bd54-49b8-a566-8e7833642444&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;cec11e4b-cfc0-4b1b-b4c9-0dcfc26799d3&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
   jekyllMaps.register(
-    '3c36df50-bd54-49b8-a566-8e7833642444',
-    [{&quot;latitude&quot;:52.53093,&quot;longitude&quot;:13.41891,&quot;title&quot;:&quot;Café Hilde&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53158,&quot;longitude&quot;:13.41703,&quot;title&quot;:&quot;Leibhaftig&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53448,&quot;longitude&quot;:13.41943,&quot;title&quot;:&quot;Unami&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53977,&quot;longitude&quot;:13.40992,&quot;title&quot;:&quot;Prater Biergarten Berlin&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.5237,&quot;longitude&quot;:13.40069,&quot;title&quot;:&quot;Curry61&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.50986,&quot;longitude&quot;:13.45102,&quot;title&quot;:&quot;Mustafas Gemüse Döner&quot;,&quot;url&quot;:&quot;/2018/01/17/food-map-berlin.html&quot;,&quot;image&quot;:&quot;&quot;}],
-    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true}
+    'cec11e4b-cfc0-4b1b-b4c9-0dcfc26799d3',
+    [{&quot;latitude&quot;:52.53093,&quot;longitude&quot;:13.41891,&quot;title&quot;:&quot;Café Hilde&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53158,&quot;longitude&quot;:13.41703,&quot;title&quot;:&quot;Leibhaftig&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53448,&quot;longitude&quot;:13.41943,&quot;title&quot;:&quot;Unami&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53977,&quot;longitude&quot;:13.40992,&quot;title&quot;:&quot;Prater Biergarten Berlin&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.5237,&quot;longitude&quot;:13.40069,&quot;title&quot;:&quot;Curry61&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.50986,&quot;longitude&quot;:13.45102,&quot;title&quot;:&quot;Mustafas Gemüse Döner&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;}],
+    {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;markerIcon&quot;:null}
   );
 &lt;/script&gt;
 
 &lt;h2 id=&quot;café-hilde&quot;&gt;&lt;a href=&quot;http://hilde-berlin.com/&quot;&gt;Café Hilde&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;This cosy neighbourhood café proved to be a winner, not just for myself and Dave, but also his retired Dad. For me, the shared breakfast plate for 2 was a triumph. Meats, cheeses, salad, boiled eggs, fruit, bread and jam all in plentiful quantities.&lt;/p&gt;
+&lt;p&gt;This cosy neighbourhood café proved to be a winner. For me, the shared breakfast plate for 2 was a triumph. Meats, cheeses, salad, boiled eggs, fruit, bread and jam all in plentiful quantities.&lt;/p&gt;
 
 &lt;p&gt;The omelettes, made with any combimnation of ingredients and fresh cakes and strudel are also worth a mention- as are their unusual combination of hot drinks including a mango chai, which was as good as it sounds!&lt;/p&gt;
 
