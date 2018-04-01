@@ -2,7 +2,7 @@
 layout: post
 title: "Food Map: Berlin"
 date: 2018-01-17 
-Categories: ["food map","Berlin","dishing up", "review", "restaurants"]
+Categories: ["food-maps","Berlin","dishing up", "review", "restaurants"]
 author: Alice Hargreaves
 location:
   - title: Café Hilde

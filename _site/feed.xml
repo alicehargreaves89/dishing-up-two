@@ -167,18 +167,18 @@ if (typeof Object.assign !== 'function') {
     <description>Making Tasty Shit</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 01 Apr 2018 10:46:27 +0100</pubDate>
-    <lastBuildDate>Sun, 01 Apr 2018 10:46:27 +0100</lastBuildDate>
+    <pubDate>Sun, 01 Apr 2018 12:30:54 +0100</pubDate>
+    <lastBuildDate>Sun, 01 Apr 2018 12:30:54 +0100</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
         <title>Food Map: Newtown</title>
         <description>&lt;p&gt;Newtown, in Inner West Sydney, will always have a place in my heart. I lived here for about a year in probably the best apartment I will ever live in with one of the most fantastic roof terraces. It’s an eclectic place with an amazing culture. From crystal shops to Thai food, if you’re ever in Sydney it’s worth the two stops on the train from the CBD.&lt;/p&gt;
 
-&lt;div id=&quot;1f1b4cb7-5366-4cc8-9709-6a4dc34cecfb&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;fbd05547-4402-4087-8cdd-208d53584bb1&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
   jekyllMaps.register(
-    '1f1b4cb7-5366-4cc8-9709-6a4dc34cecfb',
+    'fbd05547-4402-4087-8cdd-208d53584bb1',
     [{&quot;latitude&quot;:-33.89277,&quot;longitude&quot;:151.185141,&quot;title&quot;:&quot;Thai La Ong&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.896967,&quot;longitude&quot;:151.178457,&quot;title&quot;:&quot;Black Star Pastry Newtown&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.893896,&quot;longitude&quot;:151.182396,&quot;title&quot;:&quot;Brewtown Newtown&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.9031744,&quot;longitude&quot;:151.1794577,&quot;title&quot;:&quot;Pastizzi Cafe&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:-33.895836,&quot;longitude&quot;:151.1776183,&quot;title&quot;:&quot;Mary's&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;}],
     {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;markerIcon&quot;:null}
   );
@@ -219,10 +219,10 @@ if (typeof Object.assign !== 'function') {
         <title>Food Map: Berlin</title>
         <description>&lt;p&gt;Germany will always be one of my favourite places to visit, but as someone with quite a restricted diet (I don’t eat beef) I’ve always struggled to find foods that are fun, healthy, and varied. In recent years however, Berlin’s food scene has exploded and the results are phenomenal. Prenzlauer Berg in the Pankow district proved to have a huge variety of delicious eats, although we returned to Café Hilde three times.&lt;/p&gt;
 
-&lt;div id=&quot;cec11e4b-cfc0-4b1b-b4c9-0dcfc26799d3&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;4212ae97-88ab-4948-a388-57f7021dda63&quot; style=&quot;width:600px;height:400px;&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
   jekyllMaps.register(
-    'cec11e4b-cfc0-4b1b-b4c9-0dcfc26799d3',
+    '4212ae97-88ab-4948-a388-57f7021dda63',
     [{&quot;latitude&quot;:52.53093,&quot;longitude&quot;:13.41891,&quot;title&quot;:&quot;Café Hilde&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53158,&quot;longitude&quot;:13.41703,&quot;title&quot;:&quot;Leibhaftig&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53448,&quot;longitude&quot;:13.41943,&quot;title&quot;:&quot;Unami&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.53977,&quot;longitude&quot;:13.40992,&quot;title&quot;:&quot;Prater Biergarten Berlin&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.5237,&quot;longitude&quot;:13.40069,&quot;title&quot;:&quot;Curry61&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;},{&quot;latitude&quot;:52.50986,&quot;longitude&quot;:13.45102,&quot;title&quot;:&quot;Mustafas Gemüse Döner&quot;,&quot;icon&quot;:null,&quot;url&quot;:&quot;&quot;,&quot;url_text&quot;:null,&quot;image&quot;:&quot;&quot;}],
     {&quot;baseUrl&quot;:&quot;&quot;,&quot;useCluster&quot;:true,&quot;showMarker&quot;:true,&quot;showMarkerPopup&quot;:true,&quot;markerIcon&quot;:null}
   );
@@ -273,99 +273,6 @@ if (typeof Object.assign !== 'function') {
         <link>http://localhost:4000/2018/01/17/food-map-berlin.html</link>
         <guid isPermaLink="true">http://localhost:4000/2018/01/17/food-map-berlin.html</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Gravity!</title>
-        <description>&lt;p&gt;Gravity is an unopinionated theme for Jekyll, the awesome static site generator.&lt;/p&gt;
-
-&lt;p&gt;Some General Instructions for Jekyll&lt;/p&gt;
-
-&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
-        <link>http://localhost:4000/jekyll/update/2016/03/30/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2016/03/30/welcome-to-jekyll.html</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Long Longer and more Longer titles look cool too!!</title>
-        <description>&lt;p&gt;“Could I be anymore pulling ?”&lt;/p&gt;
-
-&lt;p&gt;Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
-
-&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
-        <link>http://localhost:4000/science/2016/03/30/science0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/science/2016/03/30/science0.html</guid>
-        
-        
-        <category>science</category>
-        
-      </item>
-    
-      <item>
-        <title>Science of Gravity</title>
-        <description>&lt;p&gt;“Could I be anymore pulling ?”&lt;/p&gt;
-
-&lt;p&gt;Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
-
-&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
-        <link>http://localhost:4000/science/2016/03/30/science.html</link>
-        <guid isPermaLink="true">http://localhost:4000/science/2016/03/30/science.html</guid>
-        
-        
-        <category>science</category>
-        
-      </item>
-    
-      <item>
-        <title>Design Stories : Gravity</title>
-        <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit.&lt;/p&gt;
-
-&lt;p&gt;Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
-
-&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 30 Mar 2016 15:15:31 +0100</pubDate>
-        <link>http://localhost:4000/design/science/life/2016/03/30/design-stories.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/science/life/2016/03/30/design-stories.html</guid>
-        
-        
-        <category>design</category>
-        
-        <category>science</category>
-        
-        <category>life</category>
         
       </item>
     

@@ -2,7 +2,7 @@
 layout: post
 title: "Food Map: Newtown"
 date: 2018-01-17 
-Categories: ["food map","Newtown", "Sydney", "Australia", "Inner West", "Restaurants", "food tours", "reviews"]
+Categories: ["food-maps","Newtown", "Sydney", "Australia", "Inner West", "Restaurants", "food tours", "reviews"]
 author: Alice Hargreaves
 location:
   - title: Thai La Ong
